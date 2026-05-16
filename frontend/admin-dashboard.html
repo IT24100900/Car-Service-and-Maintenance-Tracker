@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Admin Dashboard - AutoTrack</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+
+<!-- Sidebar -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo" onclick="window.location.href='index.html'">
+    <i class="fas fa-car-side"></i> Auto<span>Track</span>
+  </div>
+  <div class="sidebar-user">
+    <div class="sidebar-avatar" style="background:linear-gradient(135deg,#8e44ad,#c0392b)">A</div>
+    <div class="sidebar-user-info">
+      <div class="sidebar-user-name">Administrator</div>
+      <div class="sidebar-user-role" style="color:#e74c3c">Admin Account</div>
+    </div>
+  </div>
+  <nav class="sidebar-nav">
+    <div class="sidebar-nav-label">Overview</div>
+    <button class="nav-item active" data-tab="overview"><i class="fas fa-tachometer-alt"></i> Dashboard</button>
+    <div class="sidebar-nav-label">Manage</div>
+    <button class="nav-item" data-tab="vehicles"><i class="fas fa-car"></i> All Vehicles</button>
+    <button class="nav-item" data-tab="maintenance"><i class="fas fa-wrench"></i> Maintenance</button>
+    <button class="nav-item" data-tab="schedules"><i class="fas fa-calendar-alt"></i> Schedules</button>
+    <button class="nav-item" data-tab="users"><i class="fas fa-users"></i> Users</button>
+    <div class="sidebar-nav-label">Content</div>
+    <button class="nav-item" onclick="window.location.href='services.html'"><i class="fas fa-tools"></i> Services</button>
+    <button class="nav-item" onclick="window.location.href='shop.html'"><i class="fas fa-shopping-bag"></i> Shop</button>
+  </nav>
+  <div class="sidebar-footer">
+    <button class="btn-logout" onclick="Auth.logout()"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<div class="main-content">
+  <div class="topbar">
+    <div class="topbar-left">
+      <h1 id="page-title">Dashboard Overview</h1>
+      <p>Welcome, Admin <span style="color:#e74c3c">👑</span></p>
+    </div>
+    <div class="topbar-right">
+      <button class="topbar-btn" onclick="toggleSidebar()"><i class="fas fa-bars"></i></button>
+      <button class="topbar-btn" onclick="window.location.href='index.html'"><i class="fas fa-home"></i></button>
+    </div>
+  </div>
+
+  <div class="page-content">
+
+    <!-- OVERVIEW TAB -->
+    <div id="tab-overview" class="tab-pane">
+      <div class="admin-stat-row">
+        <div class="stat-card"><div class="stat-card-icon">👥</div><div class="stat-card-label">Total Users</div><div class="stat-card-value" id="stat-total-users">–</div></div>
+        <div class="stat-card"><div class="stat-card-icon">🚗</div><div class="stat-card-label">Total Vehicles</div><div class="stat-card-value" id="stat-total-vehicles">–</div></div>
+        <div class="stat-card"><div class="stat-card-icon">🔧</div><div class="stat-card-label">Maintenance Records</div><div class="stat-card-value" id="stat-total-maintenance">–</div></div>
+        <div class="stat-card"><div class="stat-card-icon">📅</div><div class="stat-card-label">Total Schedules</div><div class="stat-card-value" id="stat-total-schedules">–</div></div>
+      </div>
+
+      <!-- Today's Schedules -->
+      <div class="schedule-today-card">
+        <div class="schedule-today-header">
+          <h3><i class="fas fa-calendar-day" style="color:#e74c3c;margin-right:8px"></i>Today's Service Appointments</h3>
+          <span class="admin-today-badge" id="today-count">Loading...</span>
+        </div>
+        <div class="schedule-today-body" id="today-schedules">
+          <div class="empty-state"><i class="fas fa-spinner fa-spin"></i></div>
+        </div>
+      </div>
+
+      <!-- Quick Actions -->
+      <div style="margin-top:24px">
+        <h3 style="color:#fff;font-size:1rem;font-weight:700;margin-bottom:16px"><i class="fas fa-bolt" style="color:#f39c12;margin-right:8px"></i>Quick Actions</h3>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <button class="btn-new" onclick="activateTab('vehicles')"><i class="fas fa-car"></i> View Vehicles</button>
+          <button class="btn-new" onclick="activateTab('maintenance')" style="background:#2980b9"><i class="fas fa-wrench"></i> View Maintenance</button>
+          <button class="btn-new" onclick="activateTab('schedules')" style="background:#27ae60"><i class="fas fa-calendar"></i> View Schedules</button>
+          <button class="btn-new" onclick="window.location.href='services.html'" style="background:#8e44ad"><i class="fas fa-tools"></i> Manage Services</button>
+          <button class="btn-new" onclick="window.location.href='shop.html'" style="background:#d35400"><i class="fas fa-shopping-bag"></i> Manage Shop</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VEHICLES TAB -->
+    <div id="tab-vehicles" class="tab-pane" style="display:none">
+      <div class="content-header">
+        <h2><i class="fas fa-car" style="color:#e74c3c;margin-right:8px"></i>All Registered Vehicles</h2>
+        <button class="btn-new" onclick="loadAdminVehicles()"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th>Reg. Number</th><th>Vehicle</th><th>Year (MFG)</th><th>Year (Reg)</th><th>Engine</th><th>Mileage</th><th>Owner</th>
+          </tr></thead>
+          <tbody id="admin-vehicles-tbody">
+            <tr><td colspan="7" style="text-align:center;padding:20px;color:rgba(255,255,255,0.4)"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- MAINTENANCE TAB -->
+    <div id="tab-maintenance" class="tab-pane" style="display:none">
+      <div class="content-header">
+        <h2><i class="fas fa-wrench" style="color:#e74c3c;margin-right:8px"></i>All Maintenance Records</h2>
+        <button class="btn-new" onclick="loadAdminMaintenance()"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th>User</th><th>Vehicle</th><th>Service Type</th><th>Date</th><th>Mileage</th><th>Status</th>
+          </tr></thead>
+          <tbody id="admin-maintenance-tbody">
+            <tr><td colspan="6" style="text-align:center;padding:20px;color:rgba(255,255,255,0.4)"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SCHEDULES TAB -->
+    <div id="tab-schedules" class="tab-pane" style="display:none">
+      <div class="content-header">
+        <h2><i class="fas fa-calendar-alt" style="color:#e74c3c;margin-right:8px"></i>All Schedules</h2>
+        <button class="btn-new" onclick="loadAdminSchedules()"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr>
+            <th>User</th><th>Vehicle</th><th>Service Type</th><th>Date</th><th>Time</th><th>Status</th>
+          </tr></thead>
+          <tbody id="admin-schedules-tbody">
+            <tr><td colspan="6" style="text-align:center;padding:20px;color:rgba(255,255,255,0.4)"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- USERS TAB -->
+    <div id="tab-users" class="tab-pane" style="display:none">
+      <div class="content-header">
+        <h2><i class="fas fa-users" style="color:#e74c3c;margin-right:8px"></i>Registered Users</h2>
+        <button class="btn-new" onclick="loadAdminUsers()"><i class="fas fa-sync"></i> Refresh</button>
+      </div>
+      <div class="data-table-wrap">
+        <table class="data-table">
+          <thead><tr><th>#</th><th>Name</th><th>Email</th><th>Phone</th><th>Address</th></tr></thead>
+          <tbody id="admin-users-tbody">
+            <tr><td colspan="5" style="text-align:center;padding:20px;color:rgba(255,255,255,0.4)"><i class="fas fa-spinner fa-spin"></i> Loading...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/admin.js"></script>
+<script>
+  function toggleSidebar() { document.getElementById('sidebar').classList.toggle('open'); }
+
+  function activateTab(tab) {
+    document.querySelectorAll('.nav-item[data-tab]').forEach(i => i.classList.remove('active'));
+    document.querySelectorAll('.tab-pane').forEach(p => p.style.display = 'none');
+    document.querySelector(`.nav-item[data-tab="${tab}"]`)?.classList.add('active');
+    document.getElementById(`tab-${tab}`).style.display = 'block';
+    const titles = { overview:'Dashboard Overview', vehicles:'All Vehicles', maintenance:'All Maintenance', schedules:'All Schedules', users:'All Users' };
+    document.getElementById('page-title').textContent = titles[tab] || 'Admin';
+    if (tab === 'vehicles') loadAdminVehicles();
+    if (tab === 'maintenance') loadAdminMaintenance();
+    if (tab === 'schedules') loadAdminSchedules();
+    if (tab === 'users') loadAdminUsers();
+  }
+
+  // Update today count after load
+  document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(async () => {
+      try {
+        const today = await Admin.todaySchedules();
+        document.getElementById('today-count').textContent = `${today.length} Today`;
+      } catch {}
+    }, 500);
+  });
+</script>
+</body>
+</html>
