@@ -27,5 +27,27 @@ public class ShopController{
     return ResponseEntity.ok(products);
   }
 
-  //
+  //CREATE
+  @PostMapping
+  public ResponseEntity<?> create(@RequestBody ShopProduct p){
+
+    //try to save the new product to database
+    try{
+
+      //send product to service layer - handle saving
+      ShopProduct savedProduct = service.create(p);
+
+      //if saving successful return
+      return ResponseEntity.ok(savedProduct);
+    } 
+    catch(Exception e){
+
+      //if some error occurs
+      System.out.println("Error creating product: " + e.getMessage());
+      return ResponseEntity.badRequest().body(new ApiResponse(false, e.getMessage()));
+    }
+  }
+
+  //UPDATE
+  
 }
