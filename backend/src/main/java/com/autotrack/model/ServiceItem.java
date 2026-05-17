@@ -6,19 +6,21 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Document(collection = "products")
-public class ShopProduct {
+@Data //automatically creates getters, setters
+@NoArgsConstructor //creates empty constructor
+@AllArgsConstructor//creates constructor with all fields
+    
+@Document(collection = "services")
+//stored in MongoDB inside "services" collection
+    
+public class ServiceItem {
     @Id
     private String id;
     private String name;
     private String description;
     private String category;
     private double price;
-    private int stock;
-    private String imageUrl;
-    private double rating = 4.5;
+    private String duration; //time needed 
+    private String imageUrl; //img link
     private boolean active = true;
 }
