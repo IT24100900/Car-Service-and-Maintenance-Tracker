@@ -33,4 +33,3 @@ public class MaintenanceService {
 
     public List<Maintenance> getAll() { return repo.findAll(); }
 }
-
