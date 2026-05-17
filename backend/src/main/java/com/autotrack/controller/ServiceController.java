@@ -8,20 +8,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+//handles API requests and returns JSON responses
 
 @RequestMapping("/api/services")
-public class ServiceController {
-    @Autowired private ServiceItemService service;
 
+public class ServiceController {
+    @Autowired //connects service layer automatically
+    private ServiceItemService service;
+
+    // GET: Get all active services
     @GetMapping
     public ResponseEntity<?> getAll() { return ResponseEntity.ok(service.getAll()); }
 
+    // POST: Create new service
     @PostMapping
     public ResponseEntity<?> create(@RequestBody ServiceItem s) {
         try { return ResponseEntity.ok(service.create(s)); }
         catch (Exception e) { return ResponseEntity.badRequest().body(new ApiResponse(false, e.getMessage())); }
     }
 
+    // PUT: Update existing service using ID
     @PutMapping("/{id}")
     public ResponseEntity<?> update(@PathVariable String id, @RequestBody ServiceItem s) {
         try { return ResponseEntity.ok(service.update(id, s)); }
