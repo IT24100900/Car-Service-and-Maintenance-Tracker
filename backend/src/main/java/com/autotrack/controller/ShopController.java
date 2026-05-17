@@ -49,5 +49,22 @@ public class ShopController{
   }
 
   //UPDATE
-  
+  @PutMapping("/{id}")
+  public ResponseEntity<?> update(@PathVariable String id, @RequestBody ShopProduct p){
+    
+    //try to update the product with given id
+    try {
+
+      //send id and updated data to service layer
+      ShopProduct updatedProduct = service.update(id, p);
+      return ResponseEntity.ok(updatedProduct);
+  }
+    catch(Exception e){
+
+      //if any error occurs
+      System.out.println("Error updating product: " + e.getMessage());
+      return ResponseEntity.badRequest().body(new ApiResponse(false, e.getMessage()));
+    }
+
+    //DELETE
 }
