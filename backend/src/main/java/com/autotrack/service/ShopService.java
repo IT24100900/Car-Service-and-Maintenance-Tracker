@@ -71,8 +71,23 @@ public class ShopService{
     existingProduct.setImageUrl(updatedProduct.getImageUrl());
     existingProduct.setRating(updatedProduct.getRating());
 
+    //save the updated product to db
     ShopProduct savedProduct = repo.save(existingProduct);
 
     return savedProduct;
+  }
+
+  //DELETE Product
+  public void delete(String id){
+
+    //check if the product it exsis
+    ShopProduct productToDelete = repo.findById(id)
+        .orElseThrow(() -> new RuntimeException("Cannot delete - product not found with id: " + id));
+
+    //print to confirm we found the product to be deleted
+    System.out.println("Product found: " + productToDelete.getName());
+
+    //not actually deleting (just hide)
+    productToDelete.setActive(false);
   }
 }
