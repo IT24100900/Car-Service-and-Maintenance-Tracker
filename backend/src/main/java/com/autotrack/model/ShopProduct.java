@@ -111,6 +111,7 @@ public class ShopProduct {
 
     // @Data also generates toString(), equals(), hashCode()
     /*
+    optional printing line 
     @Override
     public String toString() {
         return "ShopProduct{id='" + id + "', name='" + name + "', price=" + price + "}";
