@@ -31,7 +31,7 @@ public class ShopService{
     return activeProducts;
   }
 
-  //CREATE Prodcut
+  //CREATE Product
   public ShopProduct create(ShopProduct p){
 
     if (p.getName() == null || p.getName().isEmpty()) {
@@ -56,7 +56,7 @@ public class ShopService{
   }
 
   //UPDATE Products
-  public ShopProduct update(String id, ShopProduct updateProduct){
+  public ShopProduct update(String id, ShopProduct updatedProduct){
 
     //if product doesn't exist - throwing RuntimeExecption with clear msg
     ShopProduct existingProduct = repo.findById(id)
@@ -80,7 +80,7 @@ public class ShopService{
   //DELETE Product
   public void delete(String id){
 
-    //check if the product it exsis
+    //check if the product it exsits
     ShopProduct productToDelete = repo.findById(id)
         .orElseThrow(() -> new RuntimeException("Cannot delete - product not found with id: " + id));
 
@@ -89,5 +89,11 @@ public class ShopService{
 
     //not actually deleting (just hide)
     productToDelete.setActive(false);
+
+    //save the updated product back to database
+    repo.save(productToDelete);
+
+    //confirm deletion
+    System.out.println("Product deleted successfully: " + productToDelete.getName());
   }
 }
