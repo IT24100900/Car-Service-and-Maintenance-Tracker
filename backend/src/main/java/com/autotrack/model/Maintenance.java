@@ -26,3 +26,4 @@ public class Maintenance {
     private boolean completed = false;
     private LocalDateTime createdAt = LocalDateTime.now();
 }
+
