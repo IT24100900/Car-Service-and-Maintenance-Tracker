@@ -54,4 +54,14 @@ public class ShopService{
     //returning the saved product
     return savedProduct;
   }
+
+  //UPDATE Products
+  public ShopProduct update(String id, ShopProduct updateProduct){
+
+    //if product doesn't exist - throwing RuntimeExecption with clear msg
+    ShopProduct existingProduct = repo.findById(id)
+        .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+
+    
+  }
 }
