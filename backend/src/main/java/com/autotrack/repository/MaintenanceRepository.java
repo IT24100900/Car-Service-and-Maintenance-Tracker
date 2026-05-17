@@ -9,4 +9,3 @@ public interface MaintenanceRepository extends MongoRepository<Maintenance, Stri
     List<Maintenance> findByVehicleId(String vehicleId);
     List<Maintenance> findByUserIdAndVehicleId(String userId, String vehicleId);
 }
-
