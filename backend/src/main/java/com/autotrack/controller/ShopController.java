@@ -73,7 +73,7 @@ public class ShopController{
       //try to delete the product with the given ID
       try {
 
-        //add a comment here
+        // send id to service layer to handle soft delete
         service.delete(id);
         System.out.println("Product deleted successfully with id: " + id);
         return ResponseEntity.ok(new ApiResponse(true, "Product deleted successfully"));
