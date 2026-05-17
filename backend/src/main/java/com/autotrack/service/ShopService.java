@@ -62,6 +62,17 @@ public class ShopService{
     ShopProduct existingProduct = repo.findById(id)
         .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
 
-    
+    // update each field one by one from the new (updated products)
+    existingProduct.setName(updatedProduct.getName());
+    existingProduct.setDescription(updatedProduct.getDescription());
+    existingProduct.setCategory(updatedProduct.getCategory());
+    existingProduct.setPrice(updatedProduct.getPrice());
+    existingProduct.setStock(updatedProduct.getStock());
+    existingProduct.setImageUrl(updatedProduct.getImageUrl());
+    existingProduct.setRating(updatedProduct.getRating());
+
+    ShopProduct savedProduct = repo.save(existingProduct);
+
+    return savedProduct;
   }
 }
