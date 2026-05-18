@@ -47,4 +47,36 @@ public class ShopController{
     }
 
   //UPDATE 
+  @PutMapping("/{id}")
+  public ResponseEntity<?> update(@PathVariable String id, @RequestBody ShopProduct p){
+    //try to update the product with given id
+    try {
+      //send id and updated data to service layer
+      ShopProduct updatedProduct = service.update(id, p);
+      return ResponseEntity.ok(updatedProduct);
+    }
+    catch(Exception e){
+      //if any error occurs
+      System.out.println("Error updating product: " + e.getMessage());
+      return ResponseEntity.badRequest().body(new ApiResponse(false, e.getMessage()));
+        }
+    }
+
+  //DELETE
+  @DeleteMapping("/{id}")
+  public ResponseEntity<?> delete(@PathVariable String id){
+    //try to delete the product with the given ID
+    try {
+      //add a comment here
+      service.delete(id);
+      System.out.println("Product deleted successfully with id: " + id);
+      return ResponseEntity.ok(new ApiResponse(true, "Product deleted successfully"));
+
+    }
+    catch (Exception e){
+      //if any error occurs
+      System.out.println("Error deleting product: " + e.getMessage());
+      return ResponseEntity.badRequest().body(new ApiResponse(false, e.getMessage()));
+        }
+    }
 }
