@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor//creates constructor with all fields
     
 @Document(collection = "services")
-//stored in MongoDB inside "services" collection
+//store data inside MongoDB services collection
     
 public class ServiceItem {
     @Id
