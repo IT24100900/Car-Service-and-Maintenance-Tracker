@@ -56,19 +56,41 @@ public class AdminController {
         return ResponseEntity.ok(todaySchedules);
     }
 
+    //get all users
     @GetMapping("/users")
     public ResponseEntity<?> allUsers() {
+        // get all users from database
         List<User> users = userRepo.findAll();
-        users.forEach(u -> u.setPassword(null));
+
+        for (int i = 0; i < users.size(); i++) {
+            users.get(i).setPassword(null);
+        }
+        
         return ResponseEntity.ok(users);
     }
 
+    //post send email reminder to user
     @PostMapping("/send-reminder")
     public ResponseEntity<?> sendReminder(@RequestBody EmailRequest req) {
+        // try to send the email reminder
         try {
-            emailService.sendReminder(req.getTo(), req.getSubject(), req.getBody());
+            // get email details from request and send
+            String to = req.getTo();
+            String subject = req.getSubject();
+            String body = req.getBody();
+
+            // send the email through email service
+            emailService.sendReminder(to, subject, body);
+
+            // print to confirm email was sent
+            System.out.println("Email sent successfully to: " + to);
+
+            // return success message with HTTP 200
             return ResponseEntity.ok(new ApiResponse(true, "Email sent successfully"));
-        } catch (Exception e) {
+        } 
+        catch(Exception e){
+            // if email sending failed 
+            System.out.println("Error sending email: " + e.getMessage());
             return ResponseEntity.badRequest().body(new ApiResponse(false, e.getMessage()));
         }
     }
