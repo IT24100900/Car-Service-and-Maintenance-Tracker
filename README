@@ -28,7 +28,7 @@ spring.data.mongodb.uri=mongodb+srv://<username>:<password>@<cluster>.mongodb.ne
 spring.mail.username=your-email@gmail.com
 spring.mail.password=your-16-char-app-password
 ```
-> ⚠️ Use a Gmail **App Password** (not your regular password).  
+> Use a Gmail **App Password** (not your regular password).  
 > Enable 2FA → Google Account → Security → App Passwords.
 
 ### 4. Run the Backend
@@ -38,9 +38,8 @@ mvn spring-boot:run
 ```
 Backend starts on **http://localhost:8080**
 
----
 
-## 🌐 Frontend Setup
+##  Frontend Setup
 
 ### Option A — Live Server (VS Code)
 1. Install **Live Server** extension in VS Code
@@ -64,45 +63,45 @@ Password - @Admin69, --
 
 ##  API Endpoints
 
-| Method | Endpoint                      | Access  | Description              |
-|--------|-------------------------------|---------|--------------------------|
-| POST   | /api/auth/signup              | Public  | Register user            |
-| POST   | /api/auth/login               | Public  | Login user/admin         |
-| GET    | /api/vehicles                 | User    | Get my vehicles          |
-| POST   | /api/vehicles                 | User    | Add vehicle              |
-| PUT    | /api/vehicles/{id}            | User    | Update vehicle           |
-| DELETE | /api/vehicles/{id}            | User    | Delete vehicle           |
-| GET    | /api/maintenance              | User    | Get maintenance records  |
-| POST   | /api/maintenance              | User    | Log maintenance          |
-| GET    | /api/schedules                | User    | Get schedules            |
-| POST   | /api/schedules                | User    | Book schedule            |
-| GET    | /api/services                 | Public  | Get all services         |
-| POST   | /api/services                 | Admin   | Add service              |
-| GET    | /api/shop                     | Public  | Get all products         |
-| POST   | /api/shop                     | Admin   | Add product              |
-| GET    | /api/admin/vehicles           | Admin   | All vehicles             |
-| GET    | /api/admin/schedules/today    | Admin   | Today's schedules        |
-| POST   | /api/admin/send-reminder      | Admin   | Send email reminder      |
+| Method  Endpoint                       Access   Description              |
+|--------------------------------------------------------------------------|
+| POST    /api/auth/signup               Public   Register user            |
+| POST    /api/auth/login                Public   Login user/admin         |
+| GET     /api/vehicles                  User     Get my vehicles          |
+| POST    /api/vehicles                  User     Add vehicle              |
+| PUT     /api/vehicles/{id}             User     Update vehicle           |
+| DELETE  /api/vehicles/{id}             User     Delete vehicle           |
+| GET     /api/maintenance               User     Get maintenance records  |
+| POST    /api/maintenance               User     Log maintenance          |
+| GET     /api/schedules                 User     Get schedules            |
+| POST    /api/schedules                 User     Book schedule            |
+| GET     /api/services                  Public   Get all services         |
+| POST    /api/services                  Admin    Add service              |
+| GET     /api/shop                      Public   Get all products         |
+| POST    /api/shop                      Admin    Add product              |
+| GET     /api/admin/vehicles            Admin    All vehicles             |
+| GET     /api/admin/schedules/today     Admin    Today's schedules        |
+| POST    /api/admin/send-reminder       Admin    Send email reminder      |
 
 
-## 🛠 Tech Stack
+## Tech Stack
 
-| Layer     | Technology              |
-|-----------|-------------------------
-| Backend   | Spring Boot 3.2, Java 17|
-| Database  | MongoDB Atlas           |
-| Security  | Spring Security + JWT   |
-| Email     | Spring Mail (Gmail SMTP)|
-| Frontend  | HTML5, CSS3, JavaScript |
-| Icons     | Font Awesome 6.5        |
+| Layer      Technology              |
+|------------------------------------
+| Backend    Spring Boot 3.2, Java 17|
+| Database   MongoDB Atlas           |
+| Security   Spring Security + JWT   |
+| Email      Spring Mail (Gmail SMTP)|
+| Frontend   HTML5, CSS3, JavaScript |
+| Icons      Font Awesome 6.5        |
 
 ---
 
-## 🔑 Password Requirements
+##  Password Requirements
 - Minimum 8 characters
 - At least 1 uppercase letter
 - At least 1 special character
 
-## 🚗 Registration Number Format
+## Registration Number Format
 - `CAA0000` — 3 letters + 4 digits
 - `KA0000` — 2 letters + 4 digits
