@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Services - AutoTrack</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+<nav class="navbar">
+  <div class="nav-logo" onclick="window.location.href='index.html'"><i class="fas fa-car-side"></i> Auto<span>Track</span></div>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="about.html">About Us</a></li>
+  </ul>
+  <div class="nav-auth" id="nav-auth"></div>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-content">
+    <div class="section-tag">What We Offer</div>
+    <h1>Our Auto Services</h1>
+    <p>Professional care for every aspect of your vehicle — from oil changes to full resprays</p>
+  </div>
+</div>
+
+<section class="services-page-section">
+  <!-- Admin Add Button -->
+  <div style="text-align:center">
+    <button class="btn-add-item" id="admin-add-btn" style="display:none" onclick="openServiceModal()">
+      <i class="fas fa-plus"></i> Add New Service
+    </button>
+  </div>
+
+  <!-- Category Tabs -->
+  <div class="category-tabs">
+    <button class="tab-btn active" data-cat="All" onclick="filterByCategory('All')">All Services</button>
+    <button class="tab-btn" data-cat="Preventive Maintenance" onclick="filterByCategory('Preventive Maintenance')">🔧 Preventive</button>
+    <button class="tab-btn" data-cat="Auto Detailing & Care" onclick="filterByCategory('Auto Detailing & Care')">✨ Detailing</button>
+    <button class="tab-btn" data-cat="Mechanical Services" onclick="filterByCategory('Mechanical Services')">⚙️ Mechanical</button>
+    <button class="tab-btn" data-cat="Electrical Diagnostics" onclick="filterByCategory('Electrical Diagnostics')">⚡ Electrical</button>
+    <button class="tab-btn" data-cat="Body & Paint Services" onclick="filterByCategory('Body & Paint Services')">🎨 Body & Paint</button>
+  </div>
+
+  <div class="services-list" id="services-list">
+    <div style="text-align:center;padding:40px;color:var(--text-light)"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section" style="padding:60px 5%">
+  <div class="section-header" style="margin-bottom:24px">
+    <h2 class="section-title">Ready to Book a Service?</h2>
+    <p class="section-subtitle">Login to your account and schedule an appointment in seconds.</p>
+  </div>
+  <div style="text-align:center">
+    <button class="btn-primary" onclick="window.location.href='login.html'" style="font-size:1rem;padding:14px 36px"><i class="fas fa-calendar-plus"></i> Book Now</button>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="nav-logo"><i class="fas fa-car-side"></i> Auto<span>Track</span></div>
+      <p>Your trusted partner for complete vehicle maintenance management.</p>
+    </div>
+    <div class="footer-col"><h4>Navigation</h4><a href="index.html">Home</a><a href="services.html">Services</a><a href="shop.html">Shop</a><a href="about.html">About Us</a></div>
+    <div class="footer-col"><h4>Account</h4><a href="login.html">Login</a><a href="signup.html">Sign Up</a><a href="dashboard.html">Dashboard</a></div>
+    <div class="footer-col"><h4>Contact</h4><a href="#">autotrack@gmail.com</a><a href="#">+94 11 234 5678</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2024 AutoTrack. All rights reserved.</span></div>
+</footer>
+
+<!-- Service Modal -->
+<div class="modal-overlay" id="service-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="svc-modal-title">Add Service</h3>
+      <button class="modal-close"><i class="fas fa-times"></i></button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Service Name *</label>
+      <input class="form-input" id="svc-name" placeholder="e.g. Full Oil Change">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Category *</label>
+      <select class="form-select" id="svc-category">
+        <option value="">-- Select Category --</option>
+        <option>Preventive Maintenance</option>
+        <option>Auto Detailing & Care</option>
+        <option>Mechanical Services</option>
+        <option>Electrical Diagnostics</option>
+        <option>Body & Paint Services</option>
+      </select>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label class="form-label">Price (Rs.)</label>
+        <input class="form-input" id="svc-price" type="number" placeholder="e.g. 4500">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duration</label>
+        <input class="form-input" id="svc-duration" placeholder="e.g. 45 min">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Description</label>
+      <textarea class="form-textarea" id="svc-description" placeholder="Describe the service..."></textarea>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-cancel">Cancel</button>
+      <button class="btn-save" onclick="saveService()">Save Service</button>
+    </div>
+  </div>
+</div>
+
+<script src="js/api.js"></script>
+<script src="js/services-page.js"></script>
+</body>
+</html>
