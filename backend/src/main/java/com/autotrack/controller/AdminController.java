@@ -19,24 +19,41 @@ public class AdminController {
     @Autowired private EmailService emailService;
     @Autowired private UserRepository userRepo;
 
+    //get all vehicles
     @GetMapping("/vehicles")
     public ResponseEntity<?> allVehicles() {
-        return ResponseEntity.ok(vehicleService.getAll());
+        //get all vehicles from vehicle services
+        List<Vehicle> vehicles = vehicalService.getAll();
+        return ResponseEntity.ok(vehicles);  //return the list with HTTP 200   
     }
 
+    //getting all maintenance records
     @GetMapping("/maintenance")
     public ResponseEntity<?> allMaintenance() {
-        return ResponseEntity.ok(maintenanceService.getAll());
+        // get all maintenance records from maintenance service
+        List<Maintenance> maintenanceList = maintenanceService.getAll();
+        // return the list with HTTP 200
+        return ResponseEntity.ok(maintenanceList);
     }
 
+    //getting all schedules
     @GetMapping("/schedules")
     public ResponseEntity<?> allSchedules() {
-        return ResponseEntity.ok(scheduleService.getAll());
+        // get all schedules from schedule service
+        List<Schedule> schedules = scheduleService.getAll();
+
+        // return the list with HTTP 200
+        return ResponseEntity.ok(schedules);
     }
 
+    //getting todays schdules only
     @GetMapping("/schedules/today")
     public ResponseEntity<?> todaySchedules() {
-        return ResponseEntity.ok(scheduleService.getToday());
+        // get only todays schedules from schedule service
+        List<Schedule> todaySchedules = scheduleService.getToday();
+
+        // return the list with HTTP 200
+        return ResponseEntity.ok(todaySchedules);
     }
 
     @GetMapping("/users")
