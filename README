@@ -15,6 +15,13 @@ A full-stack vehicle maintenance and service management web application.
 **Frontend:** HTML5 · CSS3 · Vanilla JavaScript  
 **Auth:** JWT (JSON Web Tokens) · BCrypt password hashing
 
+<<<<<<< HEAD
+## Setup
+1. Clone the repo
+2. Fill in `application.properties` with your MongoDB URI, Gmail credentials, and JWT secret
+3. Run the Spring Boot backend (`mvn spring-boot:run`)
+4. Open the frontend with Live Server on port 5500
+=======
 ## Setup
 1. Clone the repo
 2. Fill in `application.properties` with your MongoDB URI, Gmail credentials, and JWT secret
